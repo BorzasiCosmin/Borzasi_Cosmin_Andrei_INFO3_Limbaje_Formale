@@ -1,0 +1,157 @@
+import java.util.HashMap;
+import java.util.Map;
+
+public class ManipulareStringuri {
+
+    // Definirea alfabetelor
+    private static final char[] A = {'a', 'b', 'c'};
+    private static final char[] B = {'x', 'y', 'z'};
+    private static final char[] C = {'1', '2', '3'};
+
+    // Operația de concatenare
+    public static String concatenate(String s1, String s2) {
+        return s1 + s2;
+    }
+
+    // Operația de inversare
+    public static String invers(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+
+    // Operația de substituție
+    public static String substituie(String s, char[] a, char[] b) {
+        Map<Character, Character> substitutieMap = new HashMap<>();
+        for (int i = 0; i < Math.min(a.length, b.length); i++) {
+            substitutieMap.put(a[i], b[i]);
+        }
+
+        StringBuilder result = new StringBuilder();
+        for (char c : s.toCharArray()) {
+            result.append(substitutieMap.getOrDefault(c, c));
+        }
+
+        return result.toString();
+    }
+
+    // Operația de lungime
+    public static int lungime(String s) {
+        return s.length();
+    }
+
+    // Exemple de utilizare
+    public static void main(String[] args) {
+        String s1 = "abc";
+        String s2 = "xyz";
+        String rezultatConcatenare = concatenate(s1, s2);
+        System.out.println("Concatenarea: " + rezultatConcatenare);
+
+        String s = "abc123";
+        String rezultatInvers = invers(s);
+        System.out.println("Inversul: " + rezultatInvers);
+
+        String s3 = "axbycz";
+        String rezultatSubstitutie = substituie(s3, A, C);
+        System.out.println("Substituție: " + rezultatSubstitutie);
+
+        int lungimeS = lungime(s3);
+        System.out.println("Lungimea șirului: " + lungimeS);
+    }
+}
+
+
+
+===================================================================================
+
+
+
+2------------
+
+public class OperatiiString {
+
+    // Operația de concatenare
+    private static String concat(String s1, String s2) {
+        return s1.concat(s2);
+    }
+
+    // Operația de repetare
+    private static String repeat(String s, int n) {
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            result.append(s);
+        }
+        return result.toString();
+    }
+
+    // Operația de inversare
+    private static String reverse(String s) {
+        return new StringBuilder(s).reverse().toString();
+    }
+
+    // Operația de extracție
+    private static String extract(String s, int i, int j) {
+        return s.substring(i, j + 1);
+    }
+
+    // Operația de înlocuire
+    private static String replace(String s, String sub, String newSub) {
+        return s.replaceFirst(sub, newSub);
+    }
+
+    public static void main(String[] args) {
+        // Exemple de utilizare
+        String s1 = "abc";
+        String s2 = "def";
+        String rezultatConcatenare = concat(s1, s2);
+        System.out.println("Concatenare: " + rezultatConcatenare);
+
+        String s3 = "xyz";
+        int n = 3;
+        String rezultatRepetare = repeat(s3, n);
+        System.out.println("Repetare: " + rezultatRepetare);
+
+        String s4 = "abcdef";
+        String rezultatInversare = reverse(s4);
+        System.out.println("Inversare: " + rezultatInversare);
+
+        int i = 1;
+        int j = 4;
+        String rezultatExtractie = extract(s4, i, j);
+        System.out.println("Extracție: " + rezultatExtractie);
+
+        String s5 = "abcabc";
+        String sub = "ab";
+        String newSub = "XY";
+        String rezultatInlocuire = replace(s5, sub, newSub);
+        System.out.println("Înlocuire: " + rezultatInlocuire);
+    }
+}
+
+
+============================================================================
+
+public class OperatiiString {
+
+    // Celelalte metode rămân neschimbate
+
+    // Operația de înlocuire
+    public static String replace(String s, String sub, String newSub) {
+        return s.replace(sub, newSub);
+    }
+
+    public static void main(String[] args) {
+        // Exemplu de utilizare
+        String cuvantInput = "123";
+        String rezultatConcatenare = concat(cuvantInput, "ABC");
+        String rezultatRepetare = repeat(cuvantInput, 3);
+        String rezultatInversare = reverse(cuvantInput);
+        String rezultatExtractie = extract(cuvantInput, 0, 1);  // Exemplu de extracție de la index 0 la 1
+        String rezultatInlocuire = replace(cuvantInput, "12", "XY");
+
+        // Afișăm rezultatele
+        System.out.println("Concatenare: " + rezultatConcatenare);
+        System.out.println("Repetare: " + rezultatRepetare);
+        System.out.println("Inversare: " + rezultatInversare);
+        System.out.println("Extracție: " + rezultatExtractie);
+        System.out.println("Înlocuire: " + rezultatInlocuire);
+    }
+}
