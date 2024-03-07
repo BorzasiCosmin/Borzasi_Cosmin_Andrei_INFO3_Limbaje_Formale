@@ -1,0 +1,51 @@
+import java.util.HashMap;
+import java.util.Map;
+
+class CoffeeMachine {
+    private String currentState;
+
+    public CoffeeMachine() {
+        this.currentState = "q0";
+    }
+
+    public void transition(char inputSymbol) {
+        Map<String, Map<Character, String>> transitions = new HashMap<>();
+
+        transitions.put("q0", createTransitionMap('C', "q1", 'T', "q2", 'A', "q3", 'H', "q4"));
+        transitions.put("q1", createTransitionMap('O', "q4"));
+        transitions.put("q2", createTransitionMap('O', "q4"));
+        transitions.put("q3", createTransitionMap('O', "q4"));
+        transitions.put("q4", createTransitionMap('O', "q0"));
+
+        currentState = transitions.getOrDefault(currentState, transitions.get("q0")).getOrDefault(inputSymbol, currentState);
+    }
+
+    private Map<Character, String> createTransitionMap(Object... entries) {
+        Map<Character, String> map = new HashMap<>();
+        for (int i = 0; i < entries.length; i += 2) {
+            map.put((Character) entries[i], (String) entries[i + 1]);
+        }
+        return map;
+    }
+
+    public boolean isFinalState() {
+        return currentState.equals("q4");
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        CoffeeMachine coffeeMachine = new CoffeeMachine();
+
+        String inputSequence = "COKAOKHOK";
+        for (char symbol : inputSequence.toCharArray()) {
+            coffeeMachine.transition(symbol);
+        }
+
+        if (coffeeMachine.isFinalState()) {
+            System.out.println("Comanda finalizată. Puteți lua băutura.");
+        } else {
+            System.out.println("Comandă invalidă.");
+        }
+    }
+}
